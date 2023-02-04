@@ -19,5 +19,5 @@ for x in range(1001):
     p.stepSimulation()
     #touch sensor
     backLegTouch = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
-    print(x)
+    print(backLegTouch)
 p.disconnect()
