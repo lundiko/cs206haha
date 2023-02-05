@@ -1,6 +1,7 @@
 #petra waterstreet
 import pyrosim.pyrosim as pyrosim
 import pybullet as p
+import numpy
 import pybullet_data
 import time
 physicsClient = p.connect(p.GUI)
@@ -14,10 +15,19 @@ p.loadSDF("world.sdf")
 #Pyrosim has to do some additional setting up when it is used to simulate sensors. 
 pyrosim.Prepare_To_Simulate(robotId)
 #robotId contains an integer, indicating which robot you want prepared for simulation. 
-for x in range(1001):
+backLegSensorValues = numpy.zeros(10000)
+frontLegSensorValues = numpy.zeros(10000)
+for i in range(1001):
     time.sleep(0.016)
     p.stepSimulation()
     #touch sensor
-    backLegTouch = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
-    print(backLegTouch)
+    backLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
+    frontLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("FrontLeg")
+with open('data/backData.npy', 'wb') as f:
+    numpy.save(f,backLegSensorValues)
+    f.close
+with open('data/frontData.npy', 'wb') as f:
+    numpy.save(f,frontLegSensorValues)
+    f.close
 p.disconnect()
+print(backLegSensorValues)
