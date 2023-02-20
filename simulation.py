@@ -27,7 +27,15 @@ class SIMULATION:
             p.stepSimulation()
             self.robot.Sense(t)
             self.robot.Act(t)
-        
+            
+    def Save_Values():
+        #file save
+        with open('data/backData.npy', 'wb') as f:
+            numpy.save(f,self.robot.sensors())
+            f.close
+
+
+
     def __del__(self):
         p.disconnect()
 

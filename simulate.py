@@ -64,12 +64,4 @@ simulation.Run()
 #        controlMode = p.POSITION_CONTROL,
 #        targetPosition = targetAnglesFront[i],
 #        maxForce = c.FORCE)
-#file save
-#with open('data/backData.npy', 'wb') as f:
-#    numpy.save(f,backLegSensorValues)
-#    f.close
-#with open('data/frontData.npy', 'wb') as f:
-#    numpy.save(f,frontLegSensorValues)
-#    f.close
-
 
